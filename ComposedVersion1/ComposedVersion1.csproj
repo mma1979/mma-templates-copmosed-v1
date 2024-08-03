@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="Common\Componenets\" />
+      <Folder Include="Common\Extensions\" />
+      <Folder Include="Common\Helpers\" />
+      <Folder Include="Common\Models\" />
+      <Folder Include="Controllers\API\" />
+      <Folder Include="Core\Consts\" />
+      <Folder Include="Core\Database\" />
+      <Folder Include="Core\Enums\" />
+      <Folder Include="Core\Models\" />
+      <Folder Include="Core\Validations\" />
+      <Folder Include="DataAccess\EntityConfigurations\" />
+      <Folder Include="Infrastrcture\" />
+      <Folder Include="ProxyServices\" />
+      <Folder Include="Services\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,51 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="13.0.1" />
+        <PackageReference Include="FluentValidation" Version="11.9.2" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.7" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.7"/>
+        <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.1" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.7" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="8.0.7" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="8.0.7" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.7" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.7">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.ML" Version="3.0.1" />
+        <PackageReference Include="RestSharp" Version="111.4.1" />
+        <PackageReference Include="RestSharp.Serializers.NewtonsoftJson" Version="111.4.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Core\Database\AppLogs\" />
+      <Folder Include="Core\Database\Identity\" />
+      <Folder Include="Core\Database\Localizations\" />
+      <Folder Include="Core\Database\Lookups\" />
+      <Folder Include="Core\Validations\" />
+      <Folder Include="DataAccess\EntityConfigurations\AppDb\" />
+      <Folder Include="DataAccess\EntityConfigurations\AppLogs\" />
+      <Folder Include="DataAccess\EntityConfigurations\Identity\" />
+      <Folder Include="DataAccess\EntityConfigurations\Localizations\" />
+      <Folder Include="DataAccess\EntityConfigurations\Lookups\" />
+      <Folder Include="ProxyServices\" />
+      <Folder Include="Services\AccountService\Models\" />
+    </ItemGroup>
+
+</Project>
