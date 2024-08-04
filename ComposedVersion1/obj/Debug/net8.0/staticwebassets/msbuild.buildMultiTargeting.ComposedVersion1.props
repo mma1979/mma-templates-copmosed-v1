@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/ComposedVersion1.props" />
+</Project>

@@ -5351,19 +5351,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mabdelhay\\.nuget\\packages\\": {}
+    "/Users/mma/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\workspaces\\playground\\ComposedVersion1\\ComposedVersion1\\WebApplication1\\WebApplication1.csproj",
+      "projectUniqueName": "/Users/mma/workspaces/my-workspace/mma-templates-copmosed-v1/WebApplication1/WebApplication1.csproj",
       "projectName": "WebApplication1",
-      "projectPath": "D:\\workspaces\\playground\\ComposedVersion1\\ComposedVersion1\\WebApplication1\\WebApplication1.csproj",
-      "packagesPath": "C:\\Users\\mabdelhay\\.nuget\\packages\\",
-      "outputPath": "D:\\workspaces\\playground\\ComposedVersion1\\ComposedVersion1\\WebApplication1\\obj\\",
+      "projectPath": "/Users/mma/workspaces/my-workspace/mma-templates-copmosed-v1/WebApplication1/WebApplication1.csproj",
+      "packagesPath": "/Users/mma/.nuget/packages/",
+      "outputPath": "/Users/mma/workspaces/my-workspace/mma-templates-copmosed-v1/WebApplication1/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\mabdelhay\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/Users/mma/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -5465,7 +5465,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.101/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

@@ -64,51 +64,41 @@ public class AppUser:IdentityUser<Guid>
             return this;
         }
 
-        public AppUser SetRole(RoleDto role)
+        public AppUser SetRole(AppRoleModel role)
         {
-            UserRoles = new HashSet<UserRole>
+            AppUserRoles = new HashSet<AppUserRole>
             {
-                new UserRole{RoleId=role.Id}
+                new AppUserRole{RoleId=role.Id}
             };
             CreatedDate = DateTime.UtcNow;
             CreatedBy = 1;
 
-            Hash = GetHashCode();
-
             return this;
         }
 
-        public AppUser AddUserRoles(HashSet<UserRoleDto> userRoles)
+        public AppUser AddUserRoles(HashSet<AppUserRoleModel> userRoles)
         {
-            UserRoles = userRoles.Select(r => new UserRole { RoleId = r.RoleId }).ToHashSet();
+            AppUserRoles = userRoles.Select(r => new AppUserRole { RoleId = r.RoleId }).ToHashSet();
             CreatedDate = DateTime.UtcNow;
             CreatedBy = 1;
 
-            Hash = GetHashCode();
-
             return this;
         }
 
 
-        public AppUser AddUserToken(UserTokenDto tokenDto)
+        public AppUser AddUserToken(AppUserTokenModel tokenDto)
         {
-            UserTokens ??= new HashSet<UserToken>();
-            UserTokens.Add(new UserToken(tokenDto));
+            AppUserTokens ??= new HashSet<AppUserToken>();
+            AppUserTokens.Add(new AppUserToken(tokenDto));
             return this;
         }
 
-        public AppUser SetMembership(MembershipTypes memberShip)
-        {
-            MembershipType = memberShip;
-
-            ModifiedDate = DateTime.UtcNow;
-            return this;
-        }
-
+        
         public AppUser Delete()
         {
             IsDeleted = true;
             DeletedDate = DateTime.UtcNow;
+            
             return this;
         }
         #endregion
