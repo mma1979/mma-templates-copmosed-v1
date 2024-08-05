@@ -1,3 +1,6 @@
+using System.Security.Cryptography;
+using NodaTime;
+
 namespace WebApplication1.Common.Extensions
 {
     public static class GuidExtensions
@@ -20,5 +23,31 @@ namespace WebApplication1.Common.Extensions
             var computedPin= hash.Substring(hash.Length - 6, 6);
             return pin==computedPin;
         }
+
+        #region UUIDv7
+
+        public static Guid V7(this Guid _)
+        {
+            byte[] randomBytes = new byte[10];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(randomBytes);
+            }
+
+            var timestamp = Duration.FromTicks(SystemClock.Instance.GetCurrentInstant().ToUnixTimeTicks()).TotalMilliseconds;
+
+            byte[] guidBytes = new byte[16];
+            BitConverter.GetBytes(timestamp).CopyTo(guidBytes, 0);
+            randomBytes.CopyTo(guidBytes, 6);
+
+            // Set version to 7
+            guidBytes[6] = (byte)((guidBytes[6] & 0x0F) | 0x70);
+            // Set variant to RFC4122
+            guidBytes[8] = (byte)((guidBytes[8] & 0x3F) | 0x80);
+
+            return new Guid(guidBytes);
+        }
+
+        #endregion
     }
 }

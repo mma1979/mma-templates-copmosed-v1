@@ -1,10 +1,10 @@
 ﻿using WebApplication1.Core.Models.Identity;
 
-namespace WebApplication1.Core.Database.AppDb;
+namespace WebApplication1.Core.Database.Identity;
 
- public partial class AppRefreshToken : BaseEntity<long>
+ public partial class AppRefreshToken : BaseEntity<Guid>
     {
-        public long UserId { get; private set; } // Linked to the AspNet Identity User Id
+        public Guid UserId { get; private set; } // Linked to the AspNet Identity User Id
         public string Token { get; private set; }
         public string JwtId { get; private set; } // Map the token with jwtId
         public bool IsUsed { get; private set; } // if its used we dont want generate a new Jwt token with the same refresh token

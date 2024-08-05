@@ -2,7 +2,7 @@
 using WebApplication1.Core.Enums;
 using WebApplication1.Core.Models.Identity;
 
-namespace WebApplication1.Core.Database.AppDb;
+namespace WebApplication1.Core.Database.Identity;
 
 public class AppUser:IdentityUser<Guid>
 {
