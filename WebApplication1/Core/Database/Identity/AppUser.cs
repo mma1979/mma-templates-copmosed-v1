@@ -4,16 +4,16 @@ using WebApplication1.Core.Models.Identity;
 
 namespace WebApplication1.Core.Database.Identity;
 
-public class AppUser:IdentityUser<Guid>
+public class AppUser : IdentityUser<Guid>
 {
     public TwoFactorMethods TwoFactorMethod { get; set; }
     
-    public long? CreatedBy { get;  set; }
+    public Guid? CreatedBy { get;  set; }
     public DateTime? CreatedDate { get;  set; }
-    public long? ModifiedBy { get;  set; }
+    public Guid? ModifiedBy { get;  set; }
     public DateTime? ModifiedDate { get;  set; }
     public bool? IsDeleted { get;  set; }
-    public long? DeletedBy { get;  set; }
+    public Guid? DeletedBy { get;  set; }
     public DateTime? DeletedDate { get;  set; }
     
     
@@ -44,10 +44,7 @@ public class AppUser:IdentityUser<Guid>
             TwoFactorEnabled = false;
             TwoFactorMethod = Enums.TwoFactorMethods.None;
 
-            CreatedDate = DateTime.UtcNow;
-            CreatedBy = 1;
-
-        }
+            }
 
         public AppUser Update(AppUserModel dto)
         {
@@ -58,9 +55,6 @@ public class AppUser:IdentityUser<Guid>
             PhoneNumber = dto.PhoneNumber;
             SecurityStamp = Guid.NewGuid().ToString();
             
-            CreatedDate = DateTime.UtcNow;
-            CreatedBy = 1;
-
             return this;
         }
 
@@ -70,18 +64,14 @@ public class AppUser:IdentityUser<Guid>
             {
                 new AppUserRole{RoleId=role.Id}
             };
-            CreatedDate = DateTime.UtcNow;
-            CreatedBy = 1;
-
+           
             return this;
         }
 
         public AppUser AddUserRoles(HashSet<AppUserRoleModel> userRoles)
         {
             AppUserRoles = userRoles.Select(r => new AppUserRole { RoleId = r.RoleId }).ToHashSet();
-            CreatedDate = DateTime.UtcNow;
-            CreatedBy = 1;
-
+           
             return this;
         }
 

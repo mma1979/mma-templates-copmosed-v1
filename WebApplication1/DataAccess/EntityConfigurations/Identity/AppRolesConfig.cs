@@ -31,7 +31,7 @@ namespace WebApplication1.DataAccess.EntityConfigurations.Identity;
                 .HasColumnType("datetime")
                 .ValueGeneratedOnAdd();
         
-            builder.Property(e => e.ModifiedBy)
+            builder.Property(e => e.ModifiedDate)
                 .HasColumnType("datetime")
                 .ValueGeneratedOnUpdate();
             

@@ -2,13 +2,13 @@
 
 namespace WebApplication1.Core.Database.Identity;
 
-public class AppRoleClaim:IdentityRoleClaim<Guid>
+public class AppRoleClaim : IdentityRoleClaim<Guid>
 {
-    public long? CreatedBy { get; set; }
+    public Guid? CreatedBy { get; set; }
     public DateTime? CreatedDate { get; set; }
-    public long? ModifiedBy { get; set; }
+    public Guid? ModifiedBy { get; set; }
     public DateTime? ModifiedDate { get; set; }
     public bool? IsDeleted { get; set; }
-    public long? DeletedBy { get; set; }
+    public Guid? DeletedBy { get; set; }
     public DateTime? DeletedDate { get; set; }
 }

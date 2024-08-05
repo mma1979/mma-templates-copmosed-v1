@@ -29,7 +29,7 @@ public class AppUserConfig:IEntityTypeConfiguration<AppUser>
             builder.Property(e => e.CreatedDate).HasColumnType("datetime")
                 .ValueGeneratedOnAdd();
             
-            builder.Property(e => e.ModifiedBy).HasColumnType("datetime")
+            builder.Property(e => e.ModifiedDate).HasColumnType("datetime")
                 .ValueGeneratedOnUpdate();
             
             builder.HasIndex(e => e.IsDeleted);

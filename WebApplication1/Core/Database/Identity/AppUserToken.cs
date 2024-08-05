@@ -8,12 +8,12 @@ public class AppUserToken:IdentityUserToken<Guid>
     
     public string Token { get; private set; }
     public virtual AppUser AppUser { get; private set; }
-    public long? CreatedBy { get; private set; }
+    public Guid? CreatedBy { get; private set; }
     public DateTime? CreatedDate { get; private set; }
-    public long? ModifiedBy { get; private set; }
+    public Guid? ModifiedBy { get; private set; }
     public DateTime? ModifiedDate { get; private set; }
     public bool? IsDeleted { get; private set; }
-    public long? DeletedBy { get; private set; }
+    public Guid? DeletedBy { get; private set; }
     public DateTime? DeletedDate { get; private set; }
     
     public AppUserToken()
@@ -27,7 +27,5 @@ public class AppUserToken:IdentityUserToken<Guid>
         Value = tokenDto.Value;
         Token = tokenDto.Token;
 
-        CreatedBy = tokenDto.CreatedBy;
-        CreatedDate = DateTime.UtcNow;
     }
 }

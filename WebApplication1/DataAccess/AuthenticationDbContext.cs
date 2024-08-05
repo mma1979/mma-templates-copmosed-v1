@@ -5,19 +5,17 @@ using WebApplication1.DataAccess.EntityConfigurations.Identity;
 
 namespace WebApplication1.DataAccess;
 
-public class AuthenticationDbContext(
-    DbContextOptions<AuthenticationDbContext> options,
-    IHttpContextAccessor httpContextAccessor)
-    : IdentityDbContext<AppUser, AppRole, Guid, AppUserClaim, AppUserRole, AppUserLogin, AppRoleClaim, AppUserToken>(
-        options)
+public class AuthenticationDbContext : IdentityDbContext<AppUser, AppRole, Guid, AppUserClaim, AppUserRole, AppUserLogin, AppRoleClaim, AppUserToken>
 {
-    private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
+    public AuthenticationDbContext(DbContextOptions<AuthenticationDbContext> options) : base(options)
+    {
+    }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if (!optionsBuilder.IsConfigured)
         {
-            optionsBuilder.UseSqlServer("name=DefaultConnection");
+            optionsBuilder.UseSqlServer("name=AuthenticationConnection");
         }
     }
     

@@ -12,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
+using Serilog.Extensions.Hosting;
+using Serilog.Sinks.MSSqlServer;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using WebApplication1.Common.Helpers;
 using WebApplication1.Core.Database.Identity;
@@ -21,6 +23,28 @@ using Redis = StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration
+    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+    .AddEnvironmentVariables();
+
+builder.Host.UseSerilog((context, config) =>
+{
+    config.Enrich.FromLogContext()
+        .Enrich.WithMachineName()
+        .WriteTo.Console()
+        .WriteTo.MSSqlServer(
+            connectionString: context.Configuration.GetConnectionString("AppLogsConnection"),
+            sinkOptions: new MSSqlServerSinkOptions { TableName = "AppLogs_API", AutoCreateSqlTable = true }
+        )
+
+        .Enrich.WithProperty("Environment", context.HostingEnvironment.EnvironmentName)
+        .Enrich.WithProperty("ApplicationName", context.Configuration["Serilog:ApplicationName"])
+        .Enrich.WithEnvironmentUserName()
+        .ReadFrom.Configuration(context.Configuration);
+    //.CreateLogger();
+});
+    
 builder.Services.AddAutoMapper(System.Reflection.Assembly.GetAssembly(typeof(MappingProfile)));
 
 // configure strongly typed settings objects
@@ -35,6 +59,7 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
 });
 builder.Services.AddLogging();
 builder.Services.AddHttpContextAccessor();
+
 
 #region API Versioning
 builder.Services.AddApiVersioning(c =>

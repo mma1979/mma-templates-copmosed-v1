@@ -7,12 +7,12 @@ public class AppUserRole: IdentityUserRole<Guid>
     public virtual AppUser AppUser { get; set; }
     public virtual AppRole AppRole { get; set; }
     
-    public long? CreatedBy { get; set; }
+    public Guid? CreatedBy { get; set; }
     public DateTime? CreatedDate { get; set; }
-    public long? ModifiedBy { get; set; }
+    public Guid? ModifiedBy { get; set; }
     public DateTime? ModifiedDate { get; set; }
     public bool? IsDeleted { get; set; }
-    public long? DeletedBy { get; set; }
+    public Guid? DeletedBy { get; set; }
     public DateTime? DeletedDate { get; set; }
     
     public override int GetHashCode()

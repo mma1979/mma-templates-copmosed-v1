@@ -32,6 +32,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -164,6 +169,14 @@
               "target": "Package",
               "version": "[8.0.2, )"
             },
+            "Serilog.Enrichers.Environment": {
+              "target": "Package",
+              "version": "[3.0.1, )"
+            },
+            "Serilog.Extensions.Hosting": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
             "Serilog.Sinks.Console": {
               "target": "Package",
               "version": "[6.0.0, )"
@@ -171,6 +184,10 @@
             "Serilog.Sinks.File": {
               "target": "Package",
               "version": "[6.0.0, )"
+            },
+            "Serilog.Sinks.MSSqlServer": {
+              "target": "Package",
+              "version": "[6.6.1, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

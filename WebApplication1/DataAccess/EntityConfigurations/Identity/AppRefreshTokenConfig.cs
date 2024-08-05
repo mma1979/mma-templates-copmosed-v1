@@ -29,7 +29,7 @@ public class AppRefreshTokenConfig : IEntityTypeConfiguration<AppRefreshToken>
             .HasColumnType("datetime")
             .ValueGeneratedOnAdd();
         
-        builder.Property(e => e.ModifiedBy)
+        builder.Property(e => e.ModifiedDate)
             .HasColumnType("datetime")
             .ValueGeneratedOnUpdate();
         
