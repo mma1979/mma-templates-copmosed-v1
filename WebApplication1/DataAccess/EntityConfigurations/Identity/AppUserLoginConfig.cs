@@ -16,6 +16,7 @@ public class AppUserLoginConfig: IEntityTypeConfiguration<AppUserLogin>
     public void Configure(EntityTypeBuilder<AppUserLogin> builder)
     {
         builder.ToTable("AppUserLogins", _schema);
+        
 
         builder.HasQueryFilter(e => e.IsDeleted != true);
         builder.Property(e => e.IsDeleted).IsRequired()
@@ -27,12 +28,14 @@ public class AppUserLoginConfig: IEntityTypeConfiguration<AppUserLogin>
         
         builder.Property(e => e.ModifiedDate)
             .HasColumnType("datetime")
-            .ValueGeneratedOnUpdate();
+            .HasValueGenerator<ModifyDateTimeValueGenerator>()
+            .ValueGeneratedOnUpdateSometimes();
         
         
         builder.HasIndex(e => e.IsDeleted);
         builder.Property(e => e.DeletedDate).HasColumnType("datetime")
-            .HasValueGenerator<DeletedDateTimeValueGenerator>();
+            .HasValueGenerator<DeletedDateTimeValueGenerator>()
+            .ValueGeneratedOnUpdateSometimes();
 
       
         builder.Property(e => e.LoginProvider).HasMaxLength(500);

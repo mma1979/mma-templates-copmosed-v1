@@ -17,8 +17,9 @@ public class AppUserClaimConfig: IEntityTypeConfiguration<AppUserClaim>
     {
         builder.ToTable("AppUserClaims", _schema);
         builder.Property(e => e.Id)
-            .UseIdentityColumn();
-
+            .HasValueGenerator<GuidV7ValueGenerator>()
+            .ValueGeneratedOnAdd();
+        
         builder.HasQueryFilter(e => e.IsDeleted != true);
         builder.Property(e => e.IsDeleted).IsRequired()
             .HasDefaultValueSql("((0))");
@@ -29,12 +30,14 @@ public class AppUserClaimConfig: IEntityTypeConfiguration<AppUserClaim>
         
         builder.Property(e => e.ModifiedDate)
             .HasColumnType("datetime")
-            .ValueGeneratedOnUpdate();
+            .HasValueGenerator<ModifyDateTimeValueGenerator>()
+            .ValueGeneratedOnUpdateSometimes();
         
         
         builder.HasIndex(e => e.IsDeleted);
         builder.Property(e => e.DeletedDate).HasColumnType("datetime")
-            .HasValueGenerator<DeletedDateTimeValueGenerator>();
+            .HasValueGenerator<DeletedDateTimeValueGenerator>()
+            .ValueGeneratedOnUpdateSometimes();
 
       
         builder.Property(e => e.ClaimType).HasMaxLength(2000);

@@ -20,8 +20,8 @@ namespace WebApplication1.DataAccess.EntityConfigurations.Identity;
             builder.ToTable("AppRoles", _schema);
 
             builder.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasDefaultValue(Guid.NewGuid().V7());
+                .HasValueGenerator<GuidV7ValueGenerator>()
+                .ValueGeneratedOnAdd();
 
             builder.HasQueryFilter(e => e.IsDeleted != true);
             builder.Property(e => e.IsDeleted).IsRequired()
@@ -33,11 +33,13 @@ namespace WebApplication1.DataAccess.EntityConfigurations.Identity;
         
             builder.Property(e => e.ModifiedDate)
                 .HasColumnType("datetime")
-                .ValueGeneratedOnUpdate();
+                .HasValueGenerator<ModifyDateTimeValueGenerator>()
+                .ValueGeneratedOnUpdateSometimes();
             
             builder.HasIndex(e => e.IsDeleted);
             builder.Property(e => e.DeletedDate).HasColumnType("datetime")
-                .HasValueGenerator<DeletedDateTimeValueGenerator>();
+                .HasValueGenerator<DeletedDateTimeValueGenerator>()
+                .ValueGeneratedOnUpdateSometimes();
 
             builder.HasMany(e => e.AppUserRoles)
                 .WithOne(e => e.AppRole)

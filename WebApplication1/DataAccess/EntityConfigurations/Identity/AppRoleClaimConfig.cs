@@ -17,7 +17,8 @@ public class AppRoleClaimConfig: IEntityTypeConfiguration<AppRoleClaim>
     {
         builder.ToTable("AppRoleClaims", _schema);
         builder.Property(e => e.Id)
-            .UseIdentityColumn();
+            .HasValueGenerator<GuidV7ValueGenerator>()
+            .ValueGeneratedOnAdd();
 
         builder.HasQueryFilter(e => e.IsDeleted != true);
         builder.Property(e => e.IsDeleted).IsRequired()
@@ -29,12 +30,14 @@ public class AppRoleClaimConfig: IEntityTypeConfiguration<AppRoleClaim>
         
         builder.Property(e => e.ModifiedDate)
             .HasColumnType("datetime")
-            .ValueGeneratedOnUpdate();
+            .HasValueGenerator<ModifyDateTimeValueGenerator>()
+            .ValueGeneratedOnUpdateSometimes();
         
         
         builder.HasIndex(e => e.IsDeleted);
         builder.Property(e => e.DeletedDate).HasColumnType("datetime")
-            .HasValueGenerator<DeletedDateTimeValueGenerator>();
+            .HasValueGenerator<DeletedDateTimeValueGenerator>()
+            .ValueGeneratedOnUpdateSometimes();
 
 
         builder.Property(e => e.ClaimType).HasMaxLength(2000);

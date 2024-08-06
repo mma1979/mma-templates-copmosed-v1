@@ -18,8 +18,8 @@ public class AppRefreshTokenConfig : IEntityTypeConfiguration<AppRefreshToken>
     {
         builder.ToTable("AppRefreshTokens", _schema);
         builder.Property(e => e.Id)
-            .ValueGeneratedNever()
-            .HasDefaultValue(Guid.NewGuid().V7());
+            .HasValueGenerator<GuidV7ValueGenerator>()
+            .ValueGeneratedOnAdd();
 
         builder.HasQueryFilter(e => e.IsDeleted != true);
         builder.Property(e => e.IsDeleted).IsRequired()
@@ -31,11 +31,13 @@ public class AppRefreshTokenConfig : IEntityTypeConfiguration<AppRefreshToken>
         
         builder.Property(e => e.ModifiedDate)
             .HasColumnType("datetime")
-            .ValueGeneratedOnUpdate();
+            .HasValueGenerator<ModifyDateTimeValueGenerator>()
+            .ValueGeneratedOnUpdateSometimes();
         
         
         builder.HasIndex(e => e.IsDeleted);
         builder.Property(e => e.DeletedDate).HasColumnType("datetime")
+            .ValueGeneratedOnUpdateSometimes()
             .HasValueGenerator<DeletedDateTimeValueGenerator>();
 
         builder.HasIndex(e => e.Hash);

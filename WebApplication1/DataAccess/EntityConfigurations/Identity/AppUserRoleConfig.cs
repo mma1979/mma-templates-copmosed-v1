@@ -27,12 +27,14 @@ public class AppUserRoleConfig: IEntityTypeConfiguration<AppUserRole>
         
         builder.Property(e => e.ModifiedDate)
             .HasColumnType("datetime")
-            .ValueGeneratedOnUpdate();
+            .HasValueGenerator<ModifyDateTimeValueGenerator>()
+            .ValueGeneratedOnUpdateSometimes();
         
         
         builder.HasIndex(e => e.IsDeleted);
         builder.Property(e => e.DeletedDate).HasColumnType("datetime")
-            .HasValueGenerator<DeletedDateTimeValueGenerator>();
+            .HasValueGenerator<DeletedDateTimeValueGenerator>()
+            .ValueGeneratedOnUpdateSometimes();
 
         builder.HasIndex(e => e.UserId);
     }

@@ -22,7 +22,10 @@ public class AppUserConfig:IEntityTypeConfiguration<AppUser>
         builder.ToTable("AppUsers", _schema);
             builder.HasMany(x => x.AppUserRoles).WithOne(x => x.AppUser).HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Cascade);
 
-
+            builder.Property(e => e.Id)
+                .HasValueGenerator<GuidV7ValueGenerator>()
+                .ValueGeneratedOnAdd();
+            
             builder.HasQueryFilter(e => e.IsDeleted != true);
             builder.Property(e => e.IsDeleted).IsRequired().HasDefaultValueSql("((0))");
             
@@ -30,11 +33,13 @@ public class AppUserConfig:IEntityTypeConfiguration<AppUser>
                 .ValueGeneratedOnAdd();
             
             builder.Property(e => e.ModifiedDate).HasColumnType("datetime")
+                .HasValueGenerator<ModifyDateTimeValueGenerator>()
                 .ValueGeneratedOnUpdate();
             
             builder.HasIndex(e => e.IsDeleted);
             builder.Property(e => e.DeletedDate).HasColumnType("datetime")
-                .HasValueGenerator<DeletedDateTimeValueGenerator>();
+                .HasValueGenerator<DeletedDateTimeValueGenerator>()
+                .ValueGeneratedOnUpdateSometimes();
 
 
             builder.HasMany(e => e.AppUserRoles)

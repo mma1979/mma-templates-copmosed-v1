@@ -29,11 +29,13 @@ public class AppUserTokenConfig: IEntityTypeConfiguration<AppUserToken>
         
         builder.Property(e => e.ModifiedDate)
             .HasColumnType("datetime")
-            .ValueGeneratedOnUpdate();
+            .HasValueGenerator<ModifyDateTimeValueGenerator>()
+            .ValueGeneratedOnUpdateSometimes();
             
         builder.HasIndex(e => e.IsDeleted);
         builder.Property(e => e.DeletedDate).HasColumnType("datetime")
-            .HasValueGenerator<DeletedDateTimeValueGenerator>();
+            .HasValueGenerator<DeletedDateTimeValueGenerator>()
+            .ValueGeneratedOnUpdateSometimes();
 
 
         builder.Property(e => e.Name).HasMaxLength(100);
